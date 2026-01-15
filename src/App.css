@@ -1,0 +1,203 @@
+@media screen and (max-width: 500px){
+    .cont {
+        padding-top: 50px !important;
+    }
+    .kar {
+        height: 50px !important;
+    }
+}
+
+/* GOMB */
+.menu-button {
+  background-color: #111827;
+  border: 1px solid #1f2937;
+  color: #e5e7eb;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.menu-button:hover {
+  background-color: #161b22;
+  border-color: #6366f1;
+  transform: translateY(-1px);
+}
+
+/* DROPDOWN */
+.menu-dropdown {
+  background-color: #111827 !important; /* fontos, felülírja a Mantine default-ot */
+  border: 1px solid #1f2937 !important;
+  border-radius: 12px;
+  padding: 6px;
+  color: #e5e7eb !important;
+}
+
+/* MENU ITEM */
+.menu-dropdown .mantine-Menu-item {
+  border-radius: 8px;
+  color: #e5e7eb !important;
+  padding: 10px 12px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.menu-dropdown .mantine-Menu-item:hover {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: #6366f1 !important;
+}
+
+.menu-dropdown .mantine-Menu-item svg {
+  color: #9ca3af;
+}
+
+.menu-dropdown .mantine-Menu-item:hover svg {
+  color: #6366f1;
+}
+
+/* -------------------- MENÜ GOMB -------------------- */
+.menu-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #111827;
+  color: #e5e7eb;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.45);
+  transition: all 0.25s ease, box-shadow 0.25s ease;
+}
+
+.menu-button:hover {
+  background-color: #161b22;
+  border-color: #6366f1;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+}
+
+.menu-button .menu-icon {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.menu-button .menu-text {
+  transition: color 0.25s ease;
+}
+
+.menu-button:hover .menu-icon,
+.menu-button:hover .menu-text {
+  color: #6366f1;
+  transform: rotate(10deg);
+}
+
+/* -------------------- DROPDOWN -------------------- */
+.menu-dropdown {
+  background-color: #111827 !important;
+  border: 1px solid #1f2937 !important;
+  border-radius: 12px;
+  padding: 6px 8px;
+  color: #e5e7eb !important;
+}
+
+/* Menü elemek */
+.menu-dropdown .menu-item {
+  border-radius: 8px;
+  color: #e5e7eb !important;
+  padding: 10px 12px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.menu-dropdown .menu-item:hover {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: #6366f1 !important;
+}
+
+.menu-dropdown .menu-item svg {
+  color: #9ca3af;
+}
+
+.menu-dropdown .menu-item:hover svg {
+  color: #6366f1;
+}
+
+/* -------------------- SEARCH INPUT -------------------- */
+.search-input input {
+  background-color: #111827;
+  color: #e5e7eb;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 8px 12px;
+  transition: all 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.search-input input::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+.search-input input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Right section icon */
+.search-icon-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  padding: 4px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.search-icon-container:hover {
+  color: #6366f1;
+  transform: scale(1.1);
+}
+
+.search-input input:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+
+.category-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+/* Border lines */
+.border-line {
+  position: absolute;
+  background: #6366f1; /* indigo accent */
+  transition: all 0.5s ease;
+  z-index: 10;
+}
+
+
+/* Hover border animation */
+.category-card:hover .border-left,
+.category-card:hover .border-right {
+  height: 100%;
+}
+
+.category-card:hover .border-top,
+.category-card:hover .border-bottom {
+  width: 100%;
+}
+
+/* Optional subtle glow */
+.category-card:hover {
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.35), 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.kiscim {
+    font-size: x-large !important;
+}
+
+.mantine-Group-root {
+    height: 100%;
+    align-items: end !important;
+}
