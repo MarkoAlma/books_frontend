@@ -15,3 +15,8 @@ export const getBooksByTitle = async ({queryKey})=>{
     const resp = await axios.get(baseURL+"title/"+queryKey[1])
     return resp
 }
+
+export const getBooks = async ()=>{
+    const resp = await axios.get(baseURL)
+    return resp
+}
