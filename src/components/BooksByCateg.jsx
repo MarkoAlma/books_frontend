@@ -8,6 +8,7 @@ import {
   Card,
   Center,
   Grid,
+  Loader,
   Skeleton,
   Text,
   Title,
@@ -31,7 +32,7 @@ const BooksByCateg = () => {
         variant="light"
         title="Hiba"
       >
-        {error.message}
+        <p style={{color:'gray'}}>{error.message}</p>
       </Alert>
     )
   }
@@ -43,6 +44,7 @@ const BooksByCateg = () => {
         </Text>  
     
     }
+    {!isLoading ? <>
         <Grid
           gutter={32}
           justify="center"
@@ -65,7 +67,9 @@ const BooksByCateg = () => {
               <MyCard {...category}/>
             </Grid.Col>
           ))}
-        </Grid>
+        </Grid></>:
+        <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}><Loader style={{textAlign:'center'}}/></div>}
+
         </>
   )
 }

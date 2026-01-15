@@ -29,7 +29,7 @@ const Categories = () => {
         variant="light"
         title="Hiba"
       >
-        {error.message}
+        <p style={{color:'gray'}}>{error.message}</p>
       </Alert>
     )
   }

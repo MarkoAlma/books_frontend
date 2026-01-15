@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { getBooks } from '../utils'
-import { Grid, Skeleton, Text } from '@mantine/core'
+import { Grid, Loader, Skeleton, Text } from '@mantine/core'
 import MyCard from './MyCard'
 
 const Books = () => {
@@ -18,6 +18,7 @@ const Books = () => {
         </Text>  
     
     }
+    {!isLoading ? <>
         <Grid
           gutter={32}
           justify="center"
@@ -40,7 +41,8 @@ const Books = () => {
               <MyCard {...category}/>
             </Grid.Col>
           ))}
-        </Grid>
+        </Grid> </>
+    : <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}><Loader style={{textAlign:'center'}}/></div>}
         </>
   )
 }

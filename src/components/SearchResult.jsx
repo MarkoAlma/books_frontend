@@ -1,9 +1,10 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { getBooksByTitle } from '../utils'
-import { Grid, Skeleton, Text } from '@mantine/core'
+import { Alert, Grid, Loader, Skeleton, Text } from '@mantine/core'
 import MyCard from './MyCard'
 import { useQuery } from '@tanstack/react-query'
+import { IconInfoCircle } from '@tabler/icons-react'
 
 const SearchResult = () => {
     const {txt} = useParams()
@@ -22,7 +23,7 @@ const SearchResult = () => {
         variant="light"
         title="Hiba"
       >
-        {error.message}
+        <p style={{color:'gray'}}>{error.message}</p>
       </Alert>
     )
   }
@@ -32,7 +33,8 @@ const SearchResult = () => {
     <Text size="md" c="#9ca3af" style={{paddingBottom:'20px', marginTop:'-54px', paddingBottom:'70px', textAlign:'center'}}>
              Keresett cím: {txt}
             </Text>  
-    
+    {!isLoading ? data.data.length > 0 ?
+    <>
     <Grid
           gutter={32}
           justify="center"
@@ -55,7 +57,18 @@ const SearchResult = () => {
               <MyCard {...category}/>
             </Grid.Col>
           ))}
-        </Grid>
+        </Grid> </> :
+              <Alert
+        icon={<IconInfoCircle />}
+        color="red"
+        radius="md"
+        variant="dark"
+        title="Nincs találat!"
+      >
+
+      </Alert>
+         :
+        <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}><Loader style={{textAlign:'center'}}/></div>}
         </>
   )
 }
