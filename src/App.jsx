@@ -7,19 +7,25 @@ import BooksByCateg from './components/BooksByCateg'
 import SearchResult from './components/SearchResult'
 import "./app.css"
 import MyMenu from './components/MyMenu'
+import Dashboard from './components/Dashboard'
+import { useState } from 'react'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   const { height } = useViewportSize()
   const isMobile = useMediaQuery('(max-width: 500px)')
   const location = useLocation();  // Hook, amely visszaadja az aktuális helyet
   location && console.log(location.pathname);
-
+  const [isAdmin, setIsAdmin] = useState(false)
   
+  console.log(isAdmin);
+  
+
   return (
 
 <>
     <Affix position={{top: 20, right:20}}>
-      <MyMenu/>
+      <MyMenu setIsAdmin={setIsAdmin}/>
     </Affix>
     <Container
     className='cont'
@@ -53,6 +59,7 @@ function App() {
         <Route path='/books' element={<Books/>}/>
         <Route path='/books/categ/:categId' element={<BooksByCateg/>}/>
         <Route path='/books/search/:txt' element={<SearchResult/>}/>
+        <Route path='/dashboard' element={<ProtectedRoute isAdmin={isAdmin}> <Dashboard/> </ProtectedRoute>}/>
       </Routes>
     </Container>
 </>

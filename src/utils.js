@@ -20,3 +20,13 @@ export const getBooks = async ()=>{
     const resp = await axios.get(baseURL)
     return resp
 }
+
+export const readBooks = async (setBooks)=>{
+    const resp = await axios.get(baseURL)
+    setBooks(resp.data)
+}
+
+export const createBook = async (newBook)=>{
+    const resp = await axios.post(baseURL, newBook)
+    return resp.data
+}

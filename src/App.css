@@ -201,3 +201,11 @@
     height: 100%;
     align-items: end !important;
 }
+
+.m_b242d975:where([data-sticky]) :where(.m_4e7aa4f3) {
+  background: rgba(120,100,220,0.2) !important;
+}
+
+.m_4e7aa4f3 {
+  color: #b5aaff !important;
+}
