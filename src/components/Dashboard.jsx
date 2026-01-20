@@ -1,7 +1,7 @@
 import { Button, Flex, Modal, ScrollArea, Table, TextInput } from '@mantine/core';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { createBook, deleteBook, readBooks } from '../utils';
+import { createBook, deleteBook, readBooks, updateBook } from '../utils';
 import { ActionIcon, Group, Text } from '@mantine/core';
 import { IconTrash, IconEdit } from '@tabler/icons-react';
 
@@ -20,14 +20,16 @@ function Dashboard() {
     try {
         if (editingBook) {
           console.log("módosítás");
-          
+          const updatedBook = await updateBook(editingBook.id, newBook)
+          setBooks(prev=>prev.map(obj=>obj.id==editingBook.id ? updatedBook : obj))
         }else {
           const bookToSave = {...newBook, category_id:1, cover:"borító",rating:1}
           const savedBook = await createBook(bookToSave)
           setBooks((prev)=>[...prev, savedBook])
-          setShowForm(false)
-          setNewBook({title:'',author:'',description:''})
         }
+        setShowForm(false)
+        setNewBook({title:'',author:'',description:''})
+        setEditingBook(null)
     } catch (error) {
         console.log(error);
     }
@@ -37,7 +39,9 @@ function Dashboard() {
     try {
       const resp = await deleteBook(id)
       setBooks((prev)=>prev.filter(obj=>obj.id!=id))
-      alert(resp?.msg)
+      setTimeout(() => {
+        alert(resp?.msg)
+      }, 100); 
     } catch (error) {
       console.log(error);
       //alert(resp?.error)
@@ -353,7 +357,11 @@ function Dashboard() {
     </ScrollArea>
     <div style={{display:'flex', justifyContent:'center', height:'100%', paddingTop:'45px'}}>
 <Button
-  onClick={() => setShowForm(true)}
+onClick={() => {
+  setNewBook({ title: '', author: '', description: '' });
+  setEditingBook(null);
+  setShowForm(true);
+}}
   radius="md"
   size="md"
   fullWidth={false}
