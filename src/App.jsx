@@ -13,13 +13,9 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   const { height } = useViewportSize()
-  const isMobile = useMediaQuery('(max-width: 500px)')
+  // const isMobile = useMediaQuery('(max-width: 500px)')
   const location = useLocation();  // Hook, amely visszaadja az aktuális helyet
-  location && console.log(location.pathname);
   const [isAdmin, setIsAdmin] = useState(false)
-  
-  console.log(isAdmin);
-  
 
   return (
 
@@ -39,14 +35,20 @@ function App() {
       }}
     >
       <Stack align="center" spacing={6} mb={70}>
-        <Title
-          order={1}
-          fw={700}
-          c="#e5e7eb"
-          style={{ letterSpacing: '-0.02em' }}
-        >
-          Könyvtár
-        </Title>
+<Title
+  order={1}
+  fw={800}
+  style={{
+    fontFamily: "Inter, SF Pro, system-ui",
+    letterSpacing: '-0.03em',
+    background: 'linear-gradient(90deg, #818cf8, #22d3ee)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  }}
+>
+  Könyvtár
+</Title>
+
 
         {location.pathname == "/" &&
         <Text size="md" c="#9ca3af">

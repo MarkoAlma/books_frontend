@@ -1,7 +1,7 @@
 import { Button, Flex, Modal, ScrollArea, Table, TextInput } from '@mantine/core';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { createBook, readBooks } from '../utils';
+import { createBook, deleteBook, readBooks } from '../utils';
 import { ActionIcon, Group, Text } from '@mantine/core';
 import { IconTrash, IconEdit } from '@tabler/icons-react';
 
@@ -9,6 +9,7 @@ function Dashboard() {
   const [books, setBooks] = useState([]);
   const [newBook, setNewBook] = useState({title:'',author:'',description:''});
   const [showForm, setShowForm] = useState(false)
+  const [editingBook, setEditingBook] = useState(null)
 
   const handleChange = (e)=> {
     setNewBook({...newBook,[e.target.name]:e.target.value})
@@ -17,14 +18,36 @@ function Dashboard() {
   const handleSave = async (e)=> {
     e?.preventDefault()
     try {
-        const bookToSave = {...newBook, category_id:1, cover:"borító",rating:1}
-        const savedBook = await createBook(bookToSave)
-        setBooks((prev)=>[...prev, savedBook])
-        setShowForm(false)
-        setNewBook({title:'',author:'',description:''})
+        if (editingBook) {
+          console.log("módosítás");
+          
+        }else {
+          const bookToSave = {...newBook, category_id:1, cover:"borító",rating:1}
+          const savedBook = await createBook(bookToSave)
+          setBooks((prev)=>[...prev, savedBook])
+          setShowForm(false)
+          setNewBook({title:'',author:'',description:''})
+        }
     } catch (error) {
         console.log(error);
     }
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      const resp = await deleteBook(id)
+      setBooks((prev)=>prev.filter(obj=>obj.id!=id))
+      alert(resp?.msg)
+    } catch (error) {
+      console.log(error);
+      //alert(resp?.error)
+    }
+  }
+
+  const handleEdit = (book)=> {
+    setEditingBook(book)
+    setNewBook(book)
+    setShowForm(true)
   }
 
   useEffect(() => {
@@ -36,7 +59,7 @@ function Dashboard() {
       key={obj.id}
       sx={{
         '&:hover': {
-          backgroundColor: '#1e293b', // finom hover, nem vibráló
+          backgroundColor: '#1e293b',
         },
       }}
     >
@@ -61,6 +84,7 @@ function Dashboard() {
         <Group spacing="xs">
           {/* Törlés ikon */}
           <ActionIcon
+          onClick={()=>handleDelete(obj.id)}
             variant="filled"
             color="red"
             radius="md"
@@ -73,6 +97,7 @@ function Dashboard() {
           </ActionIcon>
           {/* Módosítás ikon */}
           <ActionIcon
+          onClick={()=>handleEdit(obj)}
             variant="filled"
             color="indigo"
             radius="md"
@@ -154,7 +179,7 @@ function Dashboard() {
 <Modal
   opened={showForm}
   onClose={()=>setShowForm(false)}
-  title="Új könyv adatai"
+  title="Könyv adatai"
   centered
   radius="lg"
   overlayProps={{
